@@ -3,8 +3,7 @@ pipeline {
     stages {
         stage('1-Clonecode') {
             steps {
-               checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'Team7-git-id', url: 'https://github.com/Owusu-77/Parallel_Jobs.git']]) 
-                
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/Owusu-77/Parallel_Jobs.git']]])
             }
         }
         stage('2-Build') {
@@ -17,13 +16,14 @@ pipeline {
                 sh 'lscpu'
             }
         }
-         stage('4-Security_Check') {
+        stage('4-Security_Check') {
             steps {
-              sh 'bash -x /var/lib/jenkins/workspace/Parallel_Job/pipeline.sh  
+                sh 'bash -x /var/lib/jenkins/workspace/Parallel_Job/pipeline.sh'
             }
-    }
+        }
     }
 }
+
 
 
 
