@@ -6,6 +6,7 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/Owusu-77/Parallel_Jobs.git']]])
             }
         }
+        stage('Parallel_stage'){
        parallel {
          stage('2-Build') {
             steps {
@@ -18,6 +19,7 @@ pipeline {
             }
         }
        }
+        }
         stage('4-Security_Check') {
             steps {
                 sh 'bash -x /var/lib/jenkins/workspace/Parallel_Job/pipeline.sh'
